@@ -5,22 +5,9 @@ function getComputersChoice(){
     return choiseOptions[randomIndex];
 } 
 
-function playRound(playerSelection,computerSelection){
+function areYouTheWinnerAgainst(playerSelection,computerSelection){
     playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase(); 
-    
-    if(playerSelection == computerSelection){
-        return "It's a tie";
-    }
-
-    if (isPlayerTheWinner(playerSelection,computerSelection)){
-        return true;
-    }else{
-        return false;
-    }
-} 
-
-function isPlayerTheWinner(playerSelection,computerSelection){
+    computerSelection = computerSelection.toLowerCase();
     let playerWinner;
     switch(playerSelection){
         case "paper":
@@ -46,34 +33,101 @@ function scissorsAgainst(opponent){
     return opponent == "paper";
 }
 
-function game(){
-    let playersResult = 0; 
-    let computerResult = 0; 
-
-    for (let i = 0; i < 5; i++) {
-        let roundResult = playRound(prompt("Rock, Paper or Scissors?","Rock"),getComputersChoice());
-        let msgResult = "The results are: Player = ";
-        if(roundResult){
-            playersResult++;
-            console.log("You Win!" + " " + msgResult + playersResult + " " + "Computer = " + computerResult);
-        }else{
-            computerResult++;
-            console.log("You Loose!" + " " + msgResult + playersResult + " " + "Computer = " + computerResult);
-        }
-    } 
-
-    whoIsTheWinner(playersResult,computerResult);
-}
-
-function whoIsTheWinner(playersResult,computerResult){
-    if(playersResult > computerResult){
-        console.log("The winner is the player");
+function isTheWinner(participant,opponent){
+    if(participant > opponent){
+        return true;
     }else if(playersResult < computerResult){
         console.log("The winner is the computer");
     }else{
         console.log("It's a tie");
     }
 }
+
+function showWinnerOfRound(playerSelection,computerSelection){
+    if(playerSelection == computerSelection){
+        p.textContent = "It's a Tie"; 
+        return;
+    }
+
+    if (areYouTheWinnerAgainst(playerSelection,computerSelection)){
+        p.textContent = 'The winner is the player'; 
+    }else{
+        p.textContent = 'The winner is the computer';   
+    }
+
+    return;
+} 
+
+function updateScore(winner){
+    const score = document.getElementById(winner);
+    score.textContent = Number(score.textContent) + 1;
+}
+function resetScore(){
+    let playerScore = document.getElementById("playerScore");
+    let computerScore = document.getElementById("computerScore");
+
+    playerScore.textContent = 0; 
+    computerScore.textContent = 0;
+}
+function checkForWinner(){
+    const playerScore = Number(document.getElementById("playerScore").textContent);
+    const computerScore = Number(document.getElementById("computerScore").textContent);
+
+    if(playerScore == 5 || computerScore == 5)resetScore(); 
+    
+    if(playerScore == 5){
+        p.textContent = "Congratulations! You are the winner";
+        selection.textContent = "";
+        p.style.color = "#48fb47";
+        p.style.fontSize= "50px";
+    }else if(computerScore == 5){
+        p.textContent = "You lost the game";
+        selection.textContent = "";
+        p.style.color = "#FF2226";
+        p.style.fontSize= "50px";
+    }
+   
+}
+function showSelections(playerSelection,computerSelection){
+    selection.textContent = "Because you choose " + String(playerSelection) +  " and Computer choose " + String(computerSelection);
+}
+function resetP(){
+    p.textContent = ""; 
+    p.style.color = "whitesmoke";
+    p.style.fontSize= "25px";
+}
+
+function playRound(e){
+    resetP();
+    let playerSelection = e.id;
+    let computerSelection = getComputersChoice();
+    showSelections(playerSelection,computerSelection);
+    showWinnerOfRound(playerSelection,computerSelection);
+    
+    if(playerSelection == computerSelection)return; 
+
+    if(areYouTheWinnerAgainst(playerSelection,computerSelection)){
+        updateScore("playerScore");
+    }else{
+       updateScore("computerScore");
+    } 
+
+    checkForWinner(); 
+
+    return;
+} 
+
+// Implementation UI 
+const result = document.querySelector('#msgScore');
+const p = document.createElement('p');
+result.appendChild(p);
+
+const selection = document.createElement('p');
+result.appendChild(selection);
+
+const buttons = document.querySelectorAll('button'); 
+buttons.forEach(key => key.addEventListener('click',() => playRound(key)));
+
 
 /* 
 
