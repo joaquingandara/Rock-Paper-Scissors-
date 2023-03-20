@@ -5,22 +5,29 @@ function getComputersChoice(){
     return choiseOptions[randomIndex];
 } 
 
-function playRound(playerSelection,computerSelection){
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase(); 
-    
+function playRound(e){
+    let playerSelection = e.textContent;
+    let computerSelection = getComputersChoice();
+    console.log(playerSelection);
+
     if(playerSelection == computerSelection){
-        return "It's a tie";
+        p.textContent = 'It is a tie'; 
+        result.appendChild(p);
+        return;
     }
 
+   
     if (isPlayerTheWinner(playerSelection,computerSelection)){
-        return true;
+        p.textContent = 'The winner is the player'; 
     }else{
-        return false;
+        p.textContent = 'The winner is the computer';   
     }
+    return;
 } 
 
 function isPlayerTheWinner(playerSelection,computerSelection){
+    playerSelection = playerSelection.toLowerCase();
+    computerSelection = computerSelection.toLowerCase();
     let playerWinner;
     switch(playerSelection){
         case "paper":
@@ -46,25 +53,6 @@ function scissorsAgainst(opponent){
     return opponent == "paper";
 }
 
-function game(){
-    let playersResult = 0; 
-    let computerResult = 0; 
-
-    for (let i = 0; i < 5; i++) {
-        let roundResult = playRound(prompt("Rock, Paper or Scissors?","Rock"),getComputersChoice());
-        let msgResult = "The results are: Player = ";
-        if(roundResult){
-            playersResult++;
-            console.log("You Win!" + " " + msgResult + playersResult + " " + "Computer = " + computerResult);
-        }else{
-            computerResult++;
-            console.log("You Loose!" + " " + msgResult + playersResult + " " + "Computer = " + computerResult);
-        }
-    } 
-
-    whoIsTheWinner(playersResult,computerResult);
-}
-
 function whoIsTheWinner(playersResult,computerResult){
     if(playersResult > computerResult){
         console.log("The winner is the player");
@@ -74,6 +62,16 @@ function whoIsTheWinner(playersResult,computerResult){
         console.log("It's a tie");
     }
 }
+
+// Implementation UI 
+const result = document.querySelector('#results');
+const p = document.createElement('p');
+result.appendChild(p);
+
+const buttons = document.querySelectorAll('button'); 
+buttons.forEach(key => key.addEventListener('click',() => playRound(key)));
+
+
 
 /* 
 
