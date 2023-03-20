@@ -4,24 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors </title>
+    <link rel="stylesheet" href="styles.css">
     <script src="game.js" defer></script>
 </head>
 <body>
-    <button>Rock</button>
-    <button>Paper</button>
-    <button>Scissors</button>
+    <div class="optionsOfGame">
+        <button id = "Rock"> <img src="images/rock" alt="Rock option for game."> </button>
+        <button id = "Paper"> <img src="images/paper" alt="Paper option for game."> </button>
+        <button id = "Scissors"> <img src="images/scissors.png" alt="Scissors option for game."> </button>    
+    </div>
 
     <div id="results">
-        <div>
-            You: 
-            <span id="playerScore">0</span>
-        </div>
-        <div>
-            Computer: 
-            <span id="computerScore">0</span>
-        </div>
-        
+        <div id="scores">
+            <div>
+                You: 
+                <span id="playerScore">0</span>
+            </div>
+            <div>
+                Computer: 
+                <span id="computerScore">0</span>
+            </div>
+        </div> 
+        <div id="msgScore">
+        </div>  
     </div>
 </body>
 </html>

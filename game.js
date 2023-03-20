@@ -77,17 +77,29 @@ function checkForWinner(){
     
     if(playerScore == 5){
         p.textContent = "Congratulations! You are the winner";
+        selection.textContent = "";
+        p.style.color = "#48fb47";
+        p.style.fontSize= "50px";
     }else if(computerScore == 5){
         p.textContent = "You lost the game";
+        selection.textContent = "";
+        p.style.color = "#FF2226";
+        p.style.fontSize= "50px";
     }
-
+   
 }
 function showSelections(playerSelection,computerSelection){
-    selection.textContent = "You choose " + String(playerSelection) +  " and Computer choose " + String(computerSelection);
+    selection.textContent = "Because you choose " + String(playerSelection) +  " and Computer choose " + String(computerSelection);
+}
+function resetP(){
+    p.textContent = ""; 
+    p.style.color = "whitesmoke";
+    p.style.fontSize= "25px";
 }
 
 function playRound(e){
-    let playerSelection = e.textContent;
+    resetP();
+    let playerSelection = e.id;
     let computerSelection = getComputersChoice();
     showSelections(playerSelection,computerSelection);
     showWinnerOfRound(playerSelection,computerSelection);
@@ -106,7 +118,7 @@ function playRound(e){
 } 
 
 // Implementation UI 
-const result = document.querySelector('#results');
+const result = document.querySelector('#msgScore');
 const p = document.createElement('p');
 result.appendChild(p);
 
@@ -115,6 +127,7 @@ result.appendChild(selection);
 
 const buttons = document.querySelectorAll('button'); 
 buttons.forEach(key => key.addEventListener('click',() => playRound(key)));
+
 
 /* 
 

@@ -1,0 +1,41 @@
+.optionsOfGame{
+    display: flex;
+    flex-direction:row;
+    gap:100px;
+    justify-content: center;
+}
+
+body{
+    display: flex;
+    background-image: url("images/background.jpg");
+    flex-direction: column;
+}
+
+#results{
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+    gap: 20px;
+    font-size:large;
+    font-size: 25px;
+    font-weight: bolder;
+    align-items: center;
+} 
+
+#scores{
+    display:flex;
+    flex-direction: row;
+    gap:20px;
+    color: orange;
+    font-weight:800;
+    font-size: 40px;
+    border: black;
+    border-style: solid;
+}
+
+#msgScore{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
