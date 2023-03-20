@@ -12,7 +12,6 @@ function playRound(e){
 
     if(playerSelection == computerSelection){
         p.textContent = 'It is a tie'; 
-        result.appendChild(p);
         return;
     }
 
